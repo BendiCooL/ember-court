@@ -7,8 +7,8 @@
 //                      buildDossier (it RETURNS the dossier bytes; this
 //                      file writes them out itself).
 //
-// Usage: node main.ts [out-dir]   (default out-dir is "out" in the repo root)
-import { cpSync, mkdirSync, rmSync, writeFileSync } from "node:fs";
+// Usage: node main.ts — output goes to MAKEFUN_OUTPUT_DIR (default /output)
+import { cpSync, mkdirSync, readdirSync, rmSync, writeFileSync } from "node:fs";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { buildDossier } from "./vendor/makefun-game.ts";
@@ -18,8 +18,13 @@ const repoRoot = dirname(fileURLToPath(import.meta.url));
 // MAKEFUN_OUTPUT_DIR environment variable stands in for it.
 const outDir = resolve(process.env.MAKEFUN_OUTPUT_DIR ?? "/output");
 
-rmSync(outDir, { recursive: true, force: true });
+// The grader mounts the output directory itself, so the directory must
+// never be removed (removing a mount point fails with EBUSY): create it
+// if it is missing, then clear only the entries inside it.
 mkdirSync(outDir, { recursive: true });
+for (const entry of readdirSync(outDir)) {
+  rmSync(join(outDir, entry), { recursive: true, force: true });
+}
 cpSync(join(repoRoot, "game"), join(outDir, "game"), { recursive: true });
 cpSync(join(repoRoot, "screenshots"), join(outDir, "screenshots"), { recursive: true });
 
