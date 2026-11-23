@@ -14,7 +14,9 @@ import { fileURLToPath } from "node:url";
 import { buildDossier } from "./vendor/makefun-game.ts";
 
 const repoRoot = dirname(fileURLToPath(import.meta.url));
-const outDir = resolve(repoRoot, process.argv[2] ?? "out");
+// The grader gives main.ts a writable /output; outside the grader the
+// MAKEFUN_OUTPUT_DIR environment variable stands in for it.
+const outDir = resolve(process.env.MAKEFUN_OUTPUT_DIR ?? "/output");
 
 rmSync(outDir, { recursive: true, force: true });
 mkdirSync(outDir, { recursive: true });
@@ -22,8 +24,9 @@ cpSync(join(repoRoot, "game"), join(outDir, "game"), { recursive: true });
 cpSync(join(repoRoot, "screenshots"), join(outDir, "screenshots"), { recursive: true });
 
 // The dossier covers the whole game tree and its screenshots; the text
-// cap is far above the ~40 KB outline this game produces, so nothing is cut.
-const dossier = await buildDossier(repoRoot, { text_max_bytes: 1_000_000 });
+// cap is the one RULES.txt names (163,840 bytes), far above the ~38 KB
+// outline this game produces, so nothing is cut.
+const dossier = await buildDossier(repoRoot, { text_max_bytes: 163_840 });
 writeFileSync(join(outDir, "dossier.json"), dossier);
 
 console.log(`Ember Court output written to ${outDir}`);
