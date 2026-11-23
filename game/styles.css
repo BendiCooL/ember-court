@@ -1,0 +1,128 @@
+/* Ember Court — dark ember theme. Everything is sized for a 1280x720 frame
+   so the whole table, both hands, lives and score are visible at once. */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; }
+body {
+  background: #171310;
+  color: #f3e9d7;
+  font-family: Georgia, "Times New Roman", serif;
+  overflow: hidden;
+}
+#app { width: 1280px; height: 720px; margin: 0 auto; display: flex; flex-direction: column;
+  background: radial-gradient(ellipse at 50% 0%, #2b1d12 0%, #171310 60%);
+  border-left: 1px solid #3a2a1a; border-right: 1px solid #3a2a1a; }
+button { font-family: inherit; cursor: pointer; }
+.btn { background: #3a2a1a; color: #f3e9d7; border: 1px solid #8a6a3f; border-radius: 6px;
+  padding: 7px 14px; font-size: 14px; }
+.btn:hover { background: #4a3823; }
+.btn.primary { background: #c85a17; border-color: #ff9a3d; font-weight: bold; }
+.btn.primary:hover { background: #e06a1f; }
+.btn.primary:disabled { background: #4a3a2c; border-color: #5a4a38; color: #9a8a74; cursor: default; }
+.btn.small { padding: 5px 10px; font-size: 12px; }
+.btn.big { font-size: 18px; padding: 12px 28px; }
+
+/* top bar */
+#topbar { display: flex; align-items: center; gap: 18px; padding: 8px 16px;
+  border-bottom: 1px solid #3a2a1a; background: #1f1712; }
+.brand { font-size: 22px; letter-spacing: 3px; color: #ffb347; font-weight: bold; }
+.round-label { font-size: 15px; color: #e8c98a; }
+.score-line { font-size: 13px; color: #cbb894; flex: 1; text-align: center; }
+.top-actions { display: flex; gap: 8px; }
+
+/* side rows */
+.side-row { display: flex; align-items: center; gap: 14px; padding: 6px 16px; min-height: 96px; }
+.avatar { width: 52px; height: 52px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+  font-size: 26px; font-weight: bold; border: 2px solid #8a6a3f; flex: none; }
+.ai-avatar { background: #27435c; color: #bcd8f0; }
+.you-avatar { background: #7a2d0e; color: #ffd9a0; }
+.side-info { min-width: 330px; }
+.side-name { font-size: 16px; font-weight: bold; margin-bottom: 3px; }
+.life-wrap { display: flex; align-items: center; gap: 8px; }
+.life-label { font-size: 11px; letter-spacing: 1px; color: #cbb894; width: 52px; }
+.life-bar { width: 190px; height: 14px; background: #33261a; border: 1px solid #6a5232; border-radius: 7px; overflow: hidden; }
+.life-fill { height: 100%; }
+.life-fill.you { background: linear-gradient(90deg, #e06a1f, #ffb347); }
+.life-fill.ai { background: linear-gradient(90deg, #3f7fb8, #8fc3e8); }
+.life-num { font-size: 13px; }
+.ember-line { display: flex; align-items: center; gap: 6px; margin-top: 4px; font-size: 13px; }
+.ember-label { color: #cbb894; }
+.ember-pips { color: #ffb347; letter-spacing: 2px; font-size: 11px; }
+.ember-hint { color: #9a8a74; font-size: 12px; }
+.mini-hand { display: flex; align-items: center; gap: 4px; margin-left: auto; }
+.hand-count { font-size: 12px; color: #9a8a74; margin-left: 8px; }
+
+/* lanes */
+#lanes { display: flex; gap: 12px; padding: 4px 16px; flex: 1; }
+.lane { flex: 1; background: #20180f; border: 1px solid #4a3823; border-radius: 8px;
+  display: flex; flex-direction: column; padding: 6px; }
+.lane.targetable { border-color: #ffb347; box-shadow: 0 0 0 2px #ffb34755; cursor: pointer; }
+.lane-name { text-align: center; font-size: 14px; letter-spacing: 1px; color: #e8c98a; margin-bottom: 4px; }
+.lane-row { display: flex; flex-wrap: wrap; gap: 4px; min-height: 74px; align-content: center; justify-content: center; }
+.lane-row.ai-row { border-bottom: 1px dashed #4a3823; padding-bottom: 4px; }
+.lane-row.you-row { padding-top: 4px; }
+.lane-mid { display: flex; align-items: center; justify-content: center; gap: 10px; padding: 2px 0; }
+.lane-score { font-size: 20px; font-weight: bold; min-width: 26px; text-align: center;
+  background: #33261a; border-radius: 5px; padding: 1px 6px; }
+.lane-score.leading { color: #ffb347; outline: 1px solid #ffb347; }
+.lane-vs { font-size: 11px; color: #9a8a74; }
+.sap-note { font-size: 11px; color: #e08a8a; align-self: center; }
+
+/* cards */
+.card { position: relative; width: 104px; height: 138px; background: linear-gradient(160deg, #f6e7c8, #e8d3a4);
+  color: #2a1d0e; border-radius: 8px; border: 2px solid #8a6a3f; padding: 6px;
+  box-shadow: 0 2px 6px #0009; flex: none; }
+.card.back { background: linear-gradient(160deg, #27435c, #16283a); border-color: #3f7fb8; }
+.card-back-mark { color: #8fc3e8; font-size: 26px; text-align: center; margin-top: 16px; }
+.lane-row .card { width: 62px; height: 66px; padding: 3px; border-width: 1px; }
+.lane-row .card .card-text, .lane-row .card .card-kind { display: none; }
+.lane-row .card .card-name { font-size: 9px; line-height: 1.1; }
+.lane-row .card .card-cost { width: 18px; height: 18px; font-size: 11px; }
+.lane-row .card .card-power { width: 20px; height: 20px; font-size: 13px; }
+.mini-hand .card { width: 26px; height: 36px; padding: 0; border-width: 1px; border-radius: 4px; }
+.mini-hand .card-back-mark { font-size: 12px; margin-top: 8px; }
+.card-cost { position: absolute; top: 4px; left: 4px; width: 26px; height: 26px; border-radius: 50%;
+  background: #c85a17; color: #fff; display: flex; align-items: center; justify-content: center;
+  font-weight: bold; font-size: 15px; border: 1px solid #7a2d0e; }
+.card-name { font-size: 14px; font-weight: bold; text-align: center; margin-top: 26px; line-height: 1.15; min-height: 32px; }
+.card-kind { font-size: 9px; letter-spacing: 1px; text-align: center; color: #7a5a2e; }
+.card-text { font-size: 11px; line-height: 1.3; text-align: center; color: #4a3823; margin-top: 5px; font-style: italic; }
+.card-power { position: absolute; right: 4px; bottom: 4px; width: 28px; height: 28px; border-radius: 50%;
+  background: #27435c; color: #fff; display: flex; align-items: center; justify-content: center;
+  font-weight: bold; font-size: 16px; border: 1px solid #16283a; }
+.card.kind-sapper { background: linear-gradient(160deg, #e8c8c8, #d3a4a4); }
+.card.kind-banner { background: linear-gradient(160deg, #f6e7c8, #e8c98a); border-color: #b8860b; }
+.card.selectable { cursor: pointer; }
+.card.selectable:hover { transform: translateY(-6px); border-color: #ffb347; }
+.card.selected { transform: translateY(-8px); border-color: #ffb347; box-shadow: 0 0 0 3px #ffb34788; }
+.card.disabled { opacity: 0.45; }
+.card.disabled.selectable:hover { transform: none; border-color: #8a6a3f; }
+
+/* player hand + controls */
+#player-hand { display: flex; gap: 8px; padding: 4px 16px 6px; align-items: flex-end; min-height: 148px; }
+#controls { display: flex; align-items: center; gap: 16px; padding: 6px 16px 10px; }
+.log { flex: 1; font-size: 12px; color: #cbb894; line-height: 1.4; }
+.log-line { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.keys-hint { font-size: 11px; color: #9a8a74; }
+
+/* overlays */
+.overlay { position: fixed; left: 0; top: 0; width: 100%; height: 100%; background: #171310ee;
+  display: flex; align-items: center; justify-content: center; z-index: 10; }
+.overlay.hidden { display: none; }
+.panel { background: #241a10; border: 1px solid #8a6a3f; border-radius: 12px; padding: 28px 36px;
+  max-width: 640px; text-align: center; box-shadow: 0 8px 40px #000c; }
+.game-title { font-size: 46px; letter-spacing: 6px; color: #ffb347; font-weight: bold; }
+.game-sub { font-size: 17px; color: #e8c98a; margin: 6px 0 16px; }
+.rules { text-align: left; font-size: 14px; line-height: 1.5; color: #e8dcc2; }
+.rules p { margin-bottom: 8px; }
+.rules b { color: #ffb347; }
+.title-foot { font-size: 12px; color: #9a8a74; margin-top: 14px; }
+.end-title { font-size: 44px; letter-spacing: 5px; font-weight: bold; }
+.end-title.won { color: #ffb347; }
+.end-title.lost { color: #7fa8c8; }
+.end-reason { font-size: 15px; color: #e8c98a; margin: 8px 0 16px; }
+.breakdown { text-align: left; margin: 0 auto 14px; max-width: 420px; }
+.break-row { display: flex; justify-content: space-between; font-size: 14px; padding: 3px 0;
+  border-bottom: 1px solid #3a2a1a; }
+.break-key { color: #cbb894; }
+.break-val { font-weight: bold; }
+.final-score { font-size: 14px; color: #e8c98a; margin-bottom: 16px; }

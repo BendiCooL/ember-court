@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ember Court — a three-lane card duel</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div id="app" data-phase="title">
+  <header id="topbar">
+    <div class="brand">EMBER COURT</div>
+    <div id="round-label" class="round-label">Round 1 / 10</div>
+    <div id="score-line" class="score-line"></div>
+    <div class="top-actions">
+      <button id="mute-btn" class="btn small">Sound: on</button>
+      <button id="new-game-btn" class="btn small">New game (N)</button>
+    </div>
+  </header>
+
+  <section id="opponent-row" class="side-row"></section>
+
+  <main id="lanes"></main>
+
+  <section id="player-row" class="side-row"></section>
+  <div id="player-hand" class="hand"></div>
+
+  <footer id="controls">
+    <button id="end-round" class="btn primary">End Round ⏎</button>
+    <div id="log" class="log"></div>
+    <div class="keys-hint">Keys: 1–5 select card · click a lane to play · Enter end round · M sound · N new game</div>
+  </footer>
+
+  <div id="title-screen" class="overlay">
+    <div class="panel title-panel">
+      <div class="game-title">EMBER COURT</div>
+      <div class="game-sub">A three-lane card duel against the Warden</div>
+      <div class="rules">
+        <p><b>Goal:</b> reduce the Warden's life to 0, or hold more life after 10 rounds.</p>
+        <p><b>Each round</b> you gain ember equal to the round (max 8) and draw up to 5 cards. Unspent ember carries over (max 10) — save up for a big round, or spend it now. The first player alternates each round; you start round 1.</p>
+        <p><b>Play cards</b> into the three lanes — Ember Gate, Frost Bridge, Thorn Hollow. A card costs ember; its power adds to your side of that lane.</p>
+        <p><b>Lanes resolve</b> when you end the round: the stronger side in a lane deals the difference as damage to the other court. Sappers remove 3 enemy power; Banners give +1 to every other friendly card in their lane.</p>
+        <p><b>Win</b> by taking the Warden to 0 life. Lose yours, and the court is his.</p>
+      </div>
+      <button id="start-btn" class="btn primary big">Enter the Court</button>
+      <div class="title-foot">Original game · plays fully offline · no account, no network</div>
+    </div>
+  </div>
+
+  <div id="end-screen" class="overlay hidden">
+    <div class="panel end-panel">
+      <div id="end-title" class="end-title won">VICTORY</div>
+      <div id="end-reason" class="end-reason"></div>
+      <div id="end-breakdown" class="breakdown"></div>
+      <div id="final-score" class="final-score"></div>
+      <button id="play-again-btn" class="btn primary big">Play again (N)</button>
+    </div>
+  </div>
+</div>
+<script type="module" src="src/main.js"></script>
+</body>
+</html>
